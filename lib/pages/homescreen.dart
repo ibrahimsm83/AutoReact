@@ -1,0 +1,461 @@
+
+
+import 'dart:ui';
+
+import 'package:autoreact/utils/api.dart';
+import 'package:autoreact/utils/constants.dart';
+import 'package:autoreact/utils/widgets/bottomnavbar.dart';
+import 'package:autoreact/utils/widgets/carousel.dart';
+import 'package:autoreact/utils/widgets/main_drawer.dart';
+import 'package:autoreact/utils/widgets/postes.dart';
+import 'package:autoreact/utils/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_svg/svg.dart';
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+//carousel images
+final List<String> imgList = [
+  "$imgpath/carads0.jpg",
+  "$imgpath/carads1.jpg",
+  "$imgpath/carads2.jpg",
+  "$imgpath/carads3.jpg",
+];
+final List<String> imgListpost = [
+  "$imgpath/car1.jfif",
+  "$imgpath/car2.jpg",
+  "$imgpath/car3.jfif",
+  "$imgpath/car4.jpg",
+];
+//svg icons
+final List<String> SvgIconsList = [
+  "$imgpath/Lcotion.svg",
+  "$imgpath/Notification.svg",
+  "$imgpath/Home.svg",
+  "$imgpath/account.svg",
+  "$imgpath/care.svg",
+  "$imgpath/message.svg",
+  // "$imgpath/car3.jfif",
+  // "$imgpath/car4.jpg",
+];
+
+//postes images
+class _HomePageState extends State<HomePage> {
+  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  bool colorva=true;
+  var value;
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+     // backgroundColor:Colors.grey[200],
+
+      key: _drawerKey,
+      //appBar: homeAppbar(),
+      appBar: customAppBar(),
+
+      //
+      resizeToAvoidBottomInset: false,
+      //bottom nav bar
+      //BottomNavigation(),
+      bottomNavigationBar:Bottomappbar(SvgIconsList),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: primaryColor,
+        onPressed: () {},
+        child:  SvgPicture.asset("$imgpath/pen.svg",color: Colors.white,height: 30,width: 30,),
+      ),
+      drawer:  MainDrawer(),
+      //bottom nav bnar
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            //searchbox
+            Container(
+              margin: EdgeInsets.all(8.0),
+             // padding: EdgeInsets.only(left:8.0),
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                 // border: Border.all(color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: sizeWidth(context)*0.8,
+                        padding: EdgeInsets.only(left:8.0),
+                    height: 48,
+                    //color: Colors.black,
+                    child:TextField(
+                  decoration: InputDecoration(
+                    hintText: "Search",
+                    hintStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: InputBorder.none,
+                    focusedErrorBorder: InputBorder.none,
+                   // suffixIcon: Icon(Icons.search,color: primaryColor,),
+                  ),
+                  ),
+                  ),
+                  //search icons
+                  Container(
+                      height: sizeheight(context),
+                      width:50,
+                      color:primaryColor,
+                      child: Center(child:Icon(Icons.search,color: Colors.white,),)),
+
+            //institute names
+              ]
+              ),
+            ),
+            Container(
+              height: sizeheight(context)*0.04,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: isntituteNames.length,
+                itemBuilder: (context, index) {
+                  return  Padding(
+                    padding: const EdgeInsets.only(left:4.0,right: 4.0),
+                    child: InkWell(
+                      onTap: (){
+                        setState(() {
+                          colorva=false;
+                          value=index;
+                        });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(15,7,15,7),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: primaryColor),
+                          color:isntituteNames[index]['InstituteName']=="ALL"&&colorva?primaryColor:index==value?primaryColor:Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child:Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:isntituteNames[index]['InstituteName']=="ALL"&&colorva?Colors.white:index==value?Colors.white:primaryColor,fontWeight: FontWeight.bold),),
+
+                        //child:isntituteNames[index]['InstituteName']=="ALL"&&colorva?Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),):index==value?Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),):Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:primaryColor,fontWeight: FontWeight.bold),)
+                      ),
+                    ),
+                  );
+                },
+                scrollDirection: Axis.horizontal,
+              ),
+            ),
+            SizedBox(height: 10),
+            //users
+            Container(
+              //color: Colors.red,
+              height: sizeheight(context)*0.12,
+              //margin: EdgeInsets.only(bottom:10.),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: usersDetails.length,
+                itemBuilder: (context, index) {
+                  return  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right:3.0,left: 3.0),
+                        child: Container(
+                          child: CircleAvatar(
+                            radius:sizeWidth(context)*0.082,
+                            backgroundColor:Colors.white,
+                            child: CircleAvatar(
+                              radius: 28,
+                              //backgroundImage:AssetImage(usersDetails[index]['image']),
+                              child: ClipRRect(
+                                  borderRadius:BorderRadius.circular(200),
+                                  child: Image.asset(usersDetails[index]['image'], width: 150, height: 150,)),
+                              // AssetImage(usersDetails[index]['image']),
+                            ),
+                          ),
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: new Border.all(
+                              color: primaryColor,
+                              width: 2.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(usersDetails[index]['usersName']),
+                      //Text("users")
+                    ],
+                  );
+                },
+                scrollDirection: Axis.horizontal,
+              ),
+            ),
+            //schools image
+            UserPostes(context,imgListpost[0]),
+            //craouser
+            CarouselWithDotsPage(imgList: imgList),
+            //schools image
+            UserPostes(context,imgListpost[1]),
+            //GridView
+            Container(
+                margin: EdgeInsets.only(left: 8,right: 8,bottom: 10 ),
+                child:Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text("Areas",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text("View All",style: TextStyle(fontSize: 18,color: primaryColor),),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        //Schools
+                        Container(
+                          width:sizeWidth(context)*0.43,
+                          height: sizeheight(context)*0.16,
+                          decoration: new BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(20.0)),
+                            image: new DecorationImage(
+                              colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
+                              image: ExactAssetImage('$imgpath/Nashville.jpg'),
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ),
+                          child:Padding(
+                            padding: const EdgeInsets.only(bottom:10.0),
+                            child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text("Nashville",style: TextStyle(color:Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)),
+                          ),
+                        ),
+
+                        //Collages
+                        Container(
+                          width:sizeWidth(context)*0.43,
+                          height: sizeheight(context)*0.16,
+                          decoration: new BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(20.0)),
+                            image: new DecorationImage(
+                              colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
+                              image: ExactAssetImage('$imgpath/chicago.jpg'),
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ),
+                          child:Padding(
+                            padding: const EdgeInsets.only(bottom:10.0),
+                            child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text("Chicago",style: TextStyle(color:Colors.white,fontSize: 20,fontWeight: FontWeight.bold))),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        //Schools
+                        Container(
+                          width:sizeWidth(context)*0.43,
+                          height: sizeheight(context)*0.16,
+                          decoration: new BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(20.0)),
+                            image: new DecorationImage(
+                              colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
+                              image: ExactAssetImage('$imgpath/upcomingcars.jpg'),
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ),
+                          child:Padding(
+                            padding: const EdgeInsets.only(bottom:10.0),
+                            child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text("Upcoming Cars",style: TextStyle(color:Colors.white,fontSize: 20,fontWeight: FontWeight.bold))),
+                          ),
+                        ),
+                        //Collages
+                        Container(
+                          width:sizeWidth(context)*0.43,
+                          height: sizeheight(context)*0.16,
+                          decoration: new BoxDecoration(
+                            //color: Colors.black,
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(20.0)),
+                              image: new DecorationImage(
+                                colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
+                              image: ExactAssetImage('$imgpath/newyork.jpg'),
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ),
+                          child:Padding(
+                            padding: const EdgeInsets.only(bottom:10.0),
+                            child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text("New York City",style: TextStyle(color:Colors.white,fontSize: 20,fontWeight: FontWeight.bold))),
+                          ),
+                        ),
+
+                      ],
+                    )
+                  ],
+                )
+            ),
+            //Schools images posts
+            UserPostes(context,imgListpost[2]),
+            UserPostes(context,imgListpost[3]),
+            //Listview builder
+            Container(
+              margin: EdgeInsets.only(left: 5,right: 8,bottom: 10 ),
+              //color: Colors.red,
+              child:Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Text("Expert Review",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Text("View All",style: TextStyle(fontSize: 18,color: primaryColor),),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    // height: sizeheight(context),
+
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: teacherReviews.length,
+                        itemBuilder:(BuildContext,index){
+                          return  Container(
+                            margin: EdgeInsets.only(left: 8,right: 8,bottom: 8),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height:sizeheight(context)*0.14,
+                                  width: sizeWidth(context)*0.3,
+                                  decoration: new BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0)),
+                                    image: new DecorationImage(
+                                      image: ExactAssetImage(teacherReviews[index]['image']),
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    //mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(teacherReviews[index]['Acadmyname'],style: TextStyle(color: primaryColor),),
+                                      SizedBox(height: 8),
+                                      Container(
+                                          width: sizeWidth(context)*0.52,
+                                          //color: Colors.red,
+                                          child: Text(teacherReviews[index]['Review'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),)),
+                                      SizedBox(height: 8),
+                                      Row(
+                                        children: [
+                                          Text(teacherReviews[index]['Reviewersname'],style: TextStyle(color: text_Color)),
+                                          Text("  |  "),
+                                          Text(teacherReviews[index]['Date'],style: TextStyle(color:text_Color)),
+                                        ],
+                                      ),
+                                    ],),
+                                )
+
+                              ],
+                            ),
+                          );
+
+                        }
+                    ),
+                  ),
+                  //SizedBox(height: 20),
+                  UserPostes(context,imgListpost[3]),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+/*........................................Custom AppBar.....................*/
+  AppBar customAppBar() {
+    return AppBar(
+      brightness: Brightness.light,
+      // backgroundColor:Colors.grey[400],
+      backgroundColor: primaryColor,
+      centerTitle: true,
+      //SecondryColor,
+      //LogoIcon
+      //leading: Icon(Icons.menu,color: white_Color),
+      title: Image.asset('$imgpath/LogoIcon.png', alignment: Alignment.center,),
+      //Icon(Icons.home,color: white_Color),
+      // title: Text(title,style: TextStyle(color: Colors.black),),
+      leading:
+      GestureDetector(
+        onTap: () => _drawerKey.currentState.openDrawer(),
+        child: Container(
+          //color: Colors.black,
+          // height: 20,
+          // width: 20,
+            padding: EdgeInsets.all(4.0),
+            margin: EdgeInsets.all(8.0),
+            // decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(10.0), color: Colors.black),
+            child: Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: SvgPicture.asset(
+                //drawericon
+                "$imgpath/drawericon.svg",
+                color: white_Color,
+                //height: 20,
+                //width: 20,
+              ),
+            )),
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 15.0),
+          child: Container(
+              height: 25,
+              width: 25,
+              child: SvgPicture.asset(SvgIconsList[0], color: white_Color)),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 15.0),
+          child: Container(
+              height: 25,
+              width: 25,
+              child: SvgPicture.asset(SvgIconsList[1], color: white_Color)),
+//
+          //Icon(Icons.notifications_active_outlined,size: 30,color: Colors.grey,),
+        ),
+      ],
+    );
+  }
+
+}
