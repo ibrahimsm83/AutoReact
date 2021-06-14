@@ -4,7 +4,7 @@ import 'package:autoreact/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-Widget Bottomappbar(List<String> btmiconpath){
+Widget Bottomappbar(List<String> btmiconpath,BuildContext context){
   return  BottomAppBar(
     color: Colors.white,
     shape: CircularNotchedRectangle(),
@@ -30,15 +30,18 @@ Widget Bottomappbar(List<String> btmiconpath){
           //   color: primaryColor,
           //   onPressed: (){},
           // ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10,5,5,5),
-            child: Container(
-              child: Column(
-                children: [
-                  SvgPicture.asset(btmiconpath[5],color: text_Color,height: 25,width: 25,),
-                  Container(
-                      child: Text("Message",style: TextStyle(color:text_Color),))
-                ],
+          InkWell(
+            onTap: ()=>Navigator.pushNamed(context, 'messageScreen'),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10,5,5,5),
+              child: Container(
+                child: Column(
+                  children: [
+                    SvgPicture.asset(btmiconpath[5],color: text_Color,height: 25,width: 25,),
+                    Container(
+                        child: Text("Message",style: TextStyle(color:text_Color),))
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,5 +1,8 @@
+import 'package:autoreact/pages/auctions_screen.dart';
 import 'package:autoreact/pages/forgetpasswordscreen.dart';
 import 'package:autoreact/pages/homescreen.dart';
+import 'package:autoreact/pages/message_screen.dart';
+import 'package:autoreact/pages/myfavourites_screen.dart';
 import 'package:autoreact/pages/signinscreen.dart';
 import 'package:autoreact/pages/signupscreen.dart';
 import 'package:autoreact/pages/signupwithmedia.dart';
@@ -24,6 +27,14 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => SignUpWithMedia());
       case 'ForgetPassword':
         return MaterialPageRoute(builder: (context) => ForgetPassword());
+      case 'messageScreen':
+        return MaterialPageRoute(builder: (context) => messageScreen());
+        //MyFavoutiresPg
+      case 'MyFavoutiresPg':
+        return MaterialPageRoute(builder: (context) => MyFavoutiresPg());
+        //AuctionsScreenpg
+      case 'AuctionsScreenpg':
+        return MaterialPageRoute(builder: (context) => AuctionsScreenpg());
       default:
         throw('Route name does not exit');
     }

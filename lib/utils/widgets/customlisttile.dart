@@ -24,14 +24,6 @@ class CustomListItem extends StatelessWidget {
             flex: 2,
             child: thumbnail,
           ),
-          // Expanded(
-          //   flex: 3,
-          //   child: _VideoDescription(
-          //     title: title,
-          //     user: user,
-          //     viewCount: viewCount,
-          //   ),
-          // ),
           const Icon(
             Icons.more_vert,
             size: 16.0,

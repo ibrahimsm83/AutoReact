@@ -42,6 +42,7 @@ final List<String> SvgIconsList = [
   "$imgpath/account.svg",
   "$imgpath/care.svg",
   "$imgpath/message.svg",
+  "$imgpath/save.svg",
   // "$imgpath/car3.jfif",
   // "$imgpath/car4.jpg",
 ];
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       //bottom nav bar
       //BottomNavigation(),
-      bottomNavigationBar:Bottomappbar(SvgIconsList),
+      bottomNavigationBar:Bottomappbar(SvgIconsList,context),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
@@ -80,7 +81,53 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             //searchbox
-            Container(
+            Padding(
+              padding: EdgeInsets.only(top:10.0,bottom: 5.0,left: 10.0,right: 10.0),
+              child: Container(
+                //margin: EdgeInsets.all(8.0),
+                // padding: EdgeInsets.only(left:8.0),
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // border: Border.all(color: Colors.blueAccent),
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: sizeWidth(context)*0.8,
+                        padding: EdgeInsets.only(left:8.0),
+                        height: 48,
+                        child:TextField(
+                          decoration: InputDecoration(
+                            hintText: "Search",
+                            hintStyle: TextStyle(color: Colors.grey),
+                            enabledBorder: InputBorder.none,
+                            focusedErrorBorder: InputBorder.none,
+                            //  focusedBorder:OutlineInputBorder(
+                            //    borderSide: const BorderSide(color: Colors.red, width: 2.0),
+                            // suffixIcon: Icon(Icons.search,color: primaryColor,),
+                          ),
+                        ),
+                      ),
+                      //search icons
+                      Padding(
+                        padding: const EdgeInsets.only(left:8.0),
+                        child: Container(
+                            height: sizeheight(context),
+                            width:50,
+                            color:primaryColor,
+                            child: Center(child:Icon(Icons.search,color: Colors.white,),)),
+                      ),
+
+                      //institute names
+                    ]
+                ),
+              ),
+            ),
+           /* Container(
               margin: EdgeInsets.all(8.0),
              // padding: EdgeInsets.only(left:8.0),
               height: 50,
@@ -117,7 +164,7 @@ class _HomePageState extends State<HomePage> {
             //institute names
               ]
               ),
-            ),
+            ),*/
             Container(
               height: sizeheight(context)*0.04,
               child: ListView.builder(
@@ -166,10 +213,10 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.only(right:3.0,left: 3.0),
                         child: Container(
                           child: CircleAvatar(
-                            radius:sizeWidth(context)*0.082,
+                            radius:35,
                             backgroundColor:Colors.white,
                             child: CircleAvatar(
-                              radius: 28,
+                              radius: 33,
                               //backgroundImage:AssetImage(usersDetails[index]['image']),
                               child: ClipRRect(
                                   borderRadius:BorderRadius.circular(200),
@@ -195,11 +242,12 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             //schools image
-            UserPostes(context,imgListpost[0]),
+            UserPostes(context,imgListpost[0],SvgIconsList[6],text_Color),
             //craouser
-            CarouselWithDotsPage(imgList: imgList),
+            appCarousal(context),
+           // CarouselWithDotsPage(imgList: imgList),
             //schools image
-            UserPostes(context,imgListpost[1]),
+            UserPostes(context,imgListpost[1],SvgIconsList[6],text_Color),
             //GridView
             Container(
                 margin: EdgeInsets.only(left: 8,right: 8,bottom: 10 ),
@@ -316,8 +364,8 @@ class _HomePageState extends State<HomePage> {
                 )
             ),
             //Schools images posts
-            UserPostes(context,imgListpost[2]),
-            UserPostes(context,imgListpost[3]),
+            UserPostes(context,imgListpost[2],SvgIconsList[6],text_Color),
+            UserPostes(context,imgListpost[3],SvgIconsList[6],text_Color),
             //Listview builder
             Container(
               margin: EdgeInsets.only(left: 5,right: 8,bottom: 10 ),
@@ -393,7 +441,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   //SizedBox(height: 20),
-                  UserPostes(context,imgListpost[3]),
+                  UserPostes(context,imgListpost[3],SvgIconsList[6],text_Color),
                 ],
               ),
             ),

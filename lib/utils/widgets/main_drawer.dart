@@ -6,7 +6,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class MainDrawer extends StatelessWidget {
+class MainDrawer extends StatefulWidget {
+  @override
+  _MainDrawerState createState() => _MainDrawerState();
+}
+//svg icons
+final List<String> droweIcons = [
+  "$imgpath/Search.svg",
+  "$imgpath/findfriend.svg",
+  "$imgpath/care.svg",
+  "$imgpath/care.svg",
+  "$imgpath/myfavourite.svg",
+  "$imgpath/NewsBlogs.svg",
+  "$imgpath/Auction.svg",
+  "$imgpath/Invite.svg",
+  "$imgpath/EventsFillAdd.svg",
+  "$imgpath/AboutUs.svg",
+  "$imgpath/ContactUs.svg",
+  "$imgpath/Setting.svg",
+
+];
+
+class _MainDrawerState extends State<MainDrawer> {
+
+
   @override
   Widget build(BuildContext context) {
     // //svg icons
@@ -25,26 +48,12 @@ class MainDrawer extends StatelessWidget {
     //   "$imgpath/svgicon/Setting.svg",
     //   "$imgpath/svgicon/SignOut.svg",
     // ];
-    //svg icons
-    //Home
-    final List<String> droweIcons = [
-      "$imgpath/Search.svg",
-      "$imgpath/findfriend.svg",
-      "$imgpath/care.svg",
-      "$imgpath/care.svg",
-      "$imgpath/myfavourite.svg",
-      "$imgpath/NewsBlogs.svg",
-      "$imgpath/Auction.svg",
-      "$imgpath/Invite.svg",
-      "$imgpath/EventsFillAdd.svg",
-      "$imgpath/AboutUs.svg",
-      "$imgpath/ContactUs.svg",
-      "$imgpath/Setting.svg",
 
-    ];
+    //Home
+
     List<String> drowerIconName=['SEARCH','FIND FRIENDS','CAR DELARS','CAR LISTING','MY FAVOURITES','NEWS & BLOG','AUCTIONS','INVITE','CAR EVENTS','ABOUT US','CONTACT US','SETTINGS'];
     //Routes
-    Map<int,dynamic> rout={0:'ForgetPassword'};
+    Map<int,dynamic> rout={0:'ForgetPassword',4:'MyFavoutiresPg',6:'AuctionsScreenpg'};
     return SafeArea(
       child: Drawer(
           child:SingleChildScrollView(

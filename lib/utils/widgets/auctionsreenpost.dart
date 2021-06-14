@@ -1,15 +1,16 @@
 
+import 'package:autoreact/pages/homescreen.dart';
 import 'package:autoreact/utils/constants.dart';
 import 'package:autoreact/utils/widgets/customlisttile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-Widget UserPostes(context,imgListpost,SaveIconsvg,color){
+Widget AuctionPost(context,imgListpost,){
   return Padding(
     padding: const EdgeInsets.only(top:5.0,bottom: 5.0,left: 10.0,right: 10.0),
     child: Container(
-     // color: Colors.red,
+      // color: Colors.red,
       child: Column(
         children: [
           Container(
@@ -27,23 +28,24 @@ Widget UserPostes(context,imgListpost,SaveIconsvg,color){
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Container(child: Text("Jhon Doe",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
-                ),
-    Row(children: [
-          SvgPicture.asset("$imgpath/Lcotion.svg",color: text_Color,height: 20,width: 20,),
-          SizedBox(width: 5.0,),
-          Text("Alexander,USA"),
-          Text("  |  "),
-          Text("2m ago "),
-        ],),
+                    Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Container(child: Text("Jhon Doe",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
+                    ),
+                    Row(children: [
+                      SvgPicture.asset("$imgpath/Lcotion.svg",color: text_Color,height: 20,width: 20,),
+                      SizedBox(width: 5.0,),
+                      Text("Alexander,USA"),
+                      Text("  |  "),
+                      Text("2m ago "),
+                    ],),
                   ],
                 ),
                 //save icons
                 SizedBox(width: 50,),
-                 SizedBox(width: 30,),
-                SvgPicture.asset(SaveIconsvg,color:color,height: 20,width: 20,),
+                SvgPicture.asset("$imgpath/save.svg",color:text_Color,height: 20,width: 20,),
+                //SizedBox(width: 30,),
+                SvgPicture.asset("$imgpath/save.svg",color:text_Color,height: 20,width: 20,),
               ],
             ),
           ),
@@ -52,22 +54,23 @@ Widget UserPostes(context,imgListpost,SaveIconsvg,color){
             padding: const EdgeInsets.only(top: 8.0,bottom: 8.0),
             child: Container(
               height: sizeheight(context)*0.28,
-             width: sizeWidth(context),
-             // width: sizeWidth(context)*0.85,
+              width: sizeWidth(context),
+              // width: sizeWidth(context)*0.85,
               decoration: new BoxDecoration(
                 //color: Colors.red,
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
                   image: AssetImage(
-                      //'assets/schoolimage.jpg'
+                    //'assets/schoolimage.jpg'
                       imgListpost
+                     // imgListpos
                   ),
                   fit: BoxFit.fill,
                 ),
               ),
             ),
           ),
-         // SizedBox(height: 10.0),
+          // SizedBox(height: 10.0),
           //imagetile
           Container(
             //color:Colors.yellow,
@@ -90,7 +93,7 @@ Widget UserPostes(context,imgListpost,SaveIconsvg,color){
                 SizedBox(height: 15.0),
                 Container(
 
-                 // margin: EdgeInsets.only(right: 8.0),
+                  // margin: EdgeInsets.only(right: 8.0),
                   height: 2.0,
                   width: sizeWidth(context),
                   color: Colors.grey[300],
@@ -111,7 +114,7 @@ Widget UserPostes(context,imgListpost,SaveIconsvg,color){
                           children: [
                             //comments
                             SvgPicture.asset("$imgpath/comments.svg",color: text_Color,height: 20,width: 20,),
-                           // Icon(Icons.mode_comment_outlined,color: Colors.grey),
+                            // Icon(Icons.mode_comment_outlined,color: Colors.grey),
                             Text("10 Comments",style: TextStyle(color: Colors.grey),),
                           ],
                         )),
