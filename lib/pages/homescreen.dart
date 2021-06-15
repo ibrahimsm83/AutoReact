@@ -122,7 +122,8 @@ class _HomePageState extends State<HomePage> {
                             child: Center(child:Icon(Icons.search,color: Colors.white,),)),
                       ),
 
-                      //institute names
+                     //Gridview
+
                     ]
                 ),
               ),

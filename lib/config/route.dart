@@ -1,4 +1,6 @@
 import 'package:autoreact/pages/auctions_screen.dart';
+import 'package:autoreact/pages/cardelars_screen.dart';
+import 'package:autoreact/pages/findfriend_screen.dart';
 import 'package:autoreact/pages/forgetpasswordscreen.dart';
 import 'package:autoreact/pages/homescreen.dart';
 import 'package:autoreact/pages/message_screen.dart';
@@ -35,6 +37,12 @@ class RouteGenerator {
         //AuctionsScreenpg
       case 'AuctionsScreenpg':
         return MaterialPageRoute(builder: (context) => AuctionsScreenpg());
+        //findFriendspg
+      case 'FindFriendspg':
+        return MaterialPageRoute(builder: (context) => FindFriendspg());
+        //CarDelarspg
+      case 'CarDelarspg':
+        return MaterialPageRoute(builder: (context) => CarDelarspg());
       default:
         throw('Route name does not exit');
     }
