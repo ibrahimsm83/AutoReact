@@ -1,6 +1,7 @@
 
 
 
+import 'package:autoreact/pages/homescreen.dart';
 import 'package:autoreact/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,8 @@ class _MainDrawerState extends State<MainDrawer> {
 
     List<String> drowerIconName=['SEARCH','FIND FRIENDS','CAR DELARS','CAR LISTING','MY FAVOURITES','NEWS & BLOG','AUCTIONS','INVITE','CAR EVENTS','ABOUT US','CONTACT US','SETTINGS'];
     //Routes
-    Map<int,dynamic> rout={0:'ForgetPassword',1:'FindFriendspg',2:'CarDelarspg',4:'MyFavoutiresPg',6:'AuctionsScreenpg'};
+    final String homepath='HomePage';
+    Map<int,dynamic> rout={0:'ForgetPassword',1:'FindFriendspg',2:'CarDelarspg',3:'CarListingpg',4:'MyFavoutiresPg',6:'AuctionsScreenpg',9:'aboutscreen'};
     return SafeArea(
       child: Drawer(
           child:SingleChildScrollView(
@@ -90,6 +92,12 @@ class _MainDrawerState extends State<MainDrawer> {
                   ),
                 ),
                 //SizedBox(height: 10,),
+                InkWell(
+                  onTap: (){
+                     Navigator.pop(context);
+                      Navigator.pushNamed(context,homepath);
+                  },
+                  child:
                 Container(
                   height: 40,
                   width: sizeWidth(context),
@@ -103,6 +111,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
                     ],
                   ),
+                ),
                 ),
                 SizedBox(height: 10,),
                 Container(
@@ -124,8 +133,9 @@ class _MainDrawerState extends State<MainDrawer> {
                           //ForgetPassword
                           onTap:(){
                             Navigator.pop(context);
-                            Navigator.pushNamed(context, rout[index]);
-                          },
+                            Navigator.pushNamed(context,rout[index]);
+                            },
+
                           child: Container(
                             width: sizeWidth(context),
                             //height: 40,
@@ -169,4 +179,12 @@ class _MainDrawerState extends State<MainDrawer> {
 
 
      }
+}
+// ExtractArgumentsScreen
+//Home pg screen name
+
+class ScreenArguments {
+  final bool carlisting;
+
+  ScreenArguments(this.carlisting);
 }

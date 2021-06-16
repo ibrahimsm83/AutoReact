@@ -43,7 +43,7 @@ Widget AuctionPost(context,imgListpost,){
                 ),
                 //save icons
                 SizedBox(width: 50,),
-                SvgPicture.asset("$imgpath/save.svg",color:text_Color,height: 20,width: 20,),
+                SvgPicture.asset("$imgpath/notboktick.svg",color:text_Color,height: 20,width: 20,),
                 //SizedBox(width: 30,),
                 SvgPicture.asset("$imgpath/save.svg",color:text_Color,height: 20,width: 20,),
               ],

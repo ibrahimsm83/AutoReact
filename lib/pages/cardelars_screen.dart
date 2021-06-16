@@ -71,11 +71,15 @@ class _CarDelarspgState extends State<CarDelarspg> {
                  ),
             child:Row(
               children: [
+                Container(
+                  margin: EdgeInsets.only(bottom:8.0),
+                  child:
                 CircleAvatar(
                   radius: 40,
                   //backgroundColor: Colors.yellow,
                   backgroundImage:
                   AssetImage(cardelarsList[index]['image']),
+                ),
                 ),
                 SizedBox(width: 10,),
                 Column(
