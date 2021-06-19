@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 Widget Bottomappbar(List<String> btmiconpath,BuildContext context){
-  return  BottomAppBar(
+  return
+    BottomAppBar(
     color: Colors.white,
     shape: CircularNotchedRectangle(),
     child: Container(

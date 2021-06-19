@@ -109,7 +109,7 @@ class _CarListingpgState extends State<CarListingpg> {
             height: sizeheight(context) * 0.04,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: isntituteNames.length,
+              itemCount: categeriesNames.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 4.0, right: 4.0),
@@ -128,7 +128,7 @@ class _CarListingpgState extends State<CarListingpg> {
                       padding: EdgeInsets.fromLTRB(15, 7, 15, 7),
                       decoration: BoxDecoration(
                         border: Border.all(color: primaryColor),
-                        color: isntituteNames[index]['InstituteName'] == "LISTING" &&
+                        color: categeriesNames[index]['InstituteName'] == "LISTING" &&
                             colorva
                             ? primaryColor
                             : index == value
@@ -137,9 +137,9 @@ class _CarListingpgState extends State<CarListingpg> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        isntituteNames[index]['InstituteName'],
+                        categeriesNames[index]['InstituteName'],
                         style: TextStyle(
-                            color: isntituteNames[index]['InstituteName'] ==
+                            color: categeriesNames[index]['InstituteName'] ==
                                 "LISTING" &&
                                 colorva
                                 ? Colors.white

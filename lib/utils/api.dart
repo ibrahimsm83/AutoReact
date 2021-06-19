@@ -3,15 +3,15 @@
 import 'package:autoreact/pages/cardelars_screen.dart';
 import 'package:autoreact/utils/constants.dart';
 
-List<Map> isntituteNames = [
+List<Map> categeriesNames = [
   {
-    "InstituteName":"LISTING"
+    "categeriesNames":"LISTING"
   },
   {
-    "InstituteName":"CAR PRICE"
+    "categeriesNames":"CAR PRICE"
   },
   {
-    "InstituteName":"BRAND CATEGORY"
+    "categeriesNames":"BRAND CATEGORY"
   },
   // {
   //   "InstituteName":"INSTITUTE"

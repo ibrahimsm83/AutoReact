@@ -5,6 +5,7 @@ import 'package:autoreact/pages/carlisting_screen.dart';
 import 'package:autoreact/pages/findfriend_screen.dart';
 import 'package:autoreact/pages/forgetpasswordscreen.dart';
 import 'package:autoreact/pages/homescreen.dart';
+import 'package:autoreact/pages/mainhomescreen.dart';
 import 'package:autoreact/pages/message_screen.dart';
 import 'package:autoreact/pages/myfavourites_screen.dart';
 import 'package:autoreact/pages/signinscreen.dart';
@@ -23,6 +24,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => SplashScreen());
       case 'HomePage':
         return MaterialPageRoute(builder: (context) => HomePage());
+        //MainHomeScreen
+      case 'MainHomeScreen':
+        return MaterialPageRoute(builder: (context) => MainHomeScreen());
       case 'LoginPg':
         return MaterialPageRoute(builder: (context) => LoginPg());
       case 'SiginUpPage':
