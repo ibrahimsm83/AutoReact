@@ -6,7 +6,6 @@ import 'package:autoreact/pages/findfriend_screen.dart';
 import 'package:autoreact/pages/mainhomescreen.dart';
 import 'package:autoreact/utils/api.dart';
 import 'package:autoreact/utils/constants.dart';
-import 'package:autoreact/utils/widgets/bottomappbar.dart';
 import 'package:autoreact/utils/widgets/bottomnavbar.dart';
 import 'package:autoreact/utils/widgets/carousel.dart';
 import 'package:autoreact/utils/widgets/main_drawer.dart';
@@ -356,6 +355,8 @@ class _HomePageState extends State<HomePage>
         children: [
           MainHomeScreen(),
           ChatPage(isSearchPresses: widget.isSearch,),
+       //  gotochatscreen(),
+          //ChatPage(isSearchPresses: widget.isSearch,),
           //ChatPage(),
           aboutscreen(),
           FindFriendspg(),
@@ -494,7 +495,7 @@ class _HomePageState extends State<HomePage>
       brightness: Brightness.light,
       // backgroundColor:Colors.grey[400],
       backgroundColor: primaryColor,
-      centerTitle: true,
+      //centerTitle: true,
       //SecondryColor,
       //LogoIcon
       //leading: Icon(Icons.menu,color: white_Color),
@@ -505,7 +506,7 @@ class _HomePageState extends State<HomePage>
           // margin: EdgeInsets.only(right:200.0),
           // padding: EdgeInsets.only(left:8.0),
           height: 40,
-          // width: sizeWidth(context)*0.8,
+          width: sizeWidth(context)*1.05,
           decoration: BoxDecoration(
             color: Colors.white,
             // border: Border.all(color: Colors.blueAccent),
@@ -530,7 +531,7 @@ class _HomePageState extends State<HomePage>
                   ),
                 )),
             Container(
-              width: sizeWidth(context) * 0.34,
+              width: sizeWidth(context) * 0.36,
               // margin: EdgeInsets.only(left:0,right: 50),
               padding: EdgeInsets.only(
                 left: 8.0,
@@ -568,7 +569,7 @@ class _HomePageState extends State<HomePage>
             // height: 20,
             // width: 20,
             padding: EdgeInsets.all(4.0),
-            margin: EdgeInsets.all(8.0),
+            margin: EdgeInsets.only(top:6.0,bottom: 6.0),
             // decoration: BoxDecoration(
             //     borderRadius: BorderRadius.circular(10.0), color: Colors.black),
             child: Padding(
@@ -584,7 +585,7 @@ class _HomePageState extends State<HomePage>
       ),
       actions: [
         SizedBox(
-          width: 50,
+          width: 10,
         ),
         Padding(
           padding: const EdgeInsets.only(right: 15.0),
@@ -603,6 +604,10 @@ class _HomePageState extends State<HomePage>
         // Icon(Icons.search,size: 25,color: white_Color),
       ],
     );
+  }
+
+  gotochatscreen() {
+    Navigator.pushNamed(context,'ChatPage');
   }
 
 /*--------------------------------FAB---------------------------------------------------*/

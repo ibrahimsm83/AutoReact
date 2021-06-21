@@ -2,6 +2,7 @@ import 'package:autoreact/pages/about_screen.dart';
 import 'package:autoreact/pages/auctions_screen.dart';
 import 'package:autoreact/pages/cardelars_screen.dart';
 import 'package:autoreact/pages/carlisting_screen.dart';
+import 'package:autoreact/pages/chat_screen.dart';
 import 'package:autoreact/pages/findfriend_screen.dart';
 import 'package:autoreact/pages/forgetpasswordscreen.dart';
 import 'package:autoreact/pages/homescreen.dart';
@@ -55,6 +56,9 @@ class RouteGenerator {
         //aboutscreen
       case 'aboutscreen':
         return MaterialPageRoute(builder: (context) => aboutscreen());
+        //ChatPage
+      case 'ChatPage':
+        return MaterialPageRoute(builder: (context) => ChatPage());
       default:
         throw('Route name does not exit');
     }

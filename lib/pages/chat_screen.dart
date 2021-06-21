@@ -117,6 +117,9 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) =>
       SafeArea(
         child:Scaffold(
+          appBar: AppBar(
+            title: Text("Chat Screen"),
+          ),
     body: SingleChildScrollView(
       child: Column(
     children: <Widget>[

@@ -1,5 +1,6 @@
 
 
+
 import 'package:autoreact/utils/api.dart';
 import 'package:autoreact/utils/constants.dart';
 import 'package:autoreact/utils/widgets/carousel.dart';
@@ -43,7 +44,11 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   bool _checkboxForSale = false;
   bool _checkboxForBuy = false;
   bool _checkboxForRent=false;
-  bool colorva = true;
+  bool colorva = false;
+  bool colorvalchek=false;
+  bool colorva1=false;
+  bool colorva2=false;
+
   bool listingbtn = false;
   bool v_carprice = false;
   bool  tab=false;
@@ -61,63 +66,133 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
 
           //item list
           Container(
-            margin: EdgeInsets.only(top: 10),
+            margin: EdgeInsets.only(top: 10,left: 4.0,right: 4.0),
+            width: sizeWidth(context),
             height: sizeheight(context) * 0.03,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: categeriesNames.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        colorva = false;
-                        value = index;
-                        if(index==0) {
-                          print(index);
-                          listingbtn = true;
-                          v_carprice=false;
-                         //colorva = true;
-                        }
-                       else if(index==1){
-                          print(index);
-                          v_carprice=true;
-                          listingbtn = false;
-                        }
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(15, 4, 15, 4),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: primaryColor),
-                        color: categeriesNames[index]['categeriesNames'] == "ALL" &&
-                                    colorva
-                                ? primaryColor
-                                : index == value
-                                    ? primaryColor
-                                    : Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        categeriesNames[index]['categeriesNames'],
-                        style: TextStyle(
-                            color: categeriesNames[index]['categeriesNames'] ==
-                                        "ALL" &&
-                                    colorva
-                                ? Colors.white
-                                : index == value
-                                    ? Colors.white
-                                    : primaryColor,
-                            fontWeight: FontWeight.bold,fontSize: 13),
-                      ),
+            child:
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      listingbtn = true;
+                      v_carprice=false;
 
-                      //child:isntituteNames[index]['InstituteName']=="ALL"&&colorva?Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),):index==value?Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),):Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:primaryColor,fontWeight: FontWeight.bold),)
+                      if(colorva==true){
+                        colorva=false;
+                      }else{
+                        colorva=true;
+                      }
+                      if(colorvalchek==true&&colorva1==true) {
+                        colorvalchek = true;
+                        colorva1=false;
+                      }
+                      else if(colorvalchek==true&&colorva2==true){
+                        colorvalchek = true;
+                        colorva2=false;
+                      }
+                      else{
+                        colorvalchek = true;
+                      }
+                    });
+                  },
+                  child: Container(
+            padding: EdgeInsets.fromLTRB(15, 4, 15, 4),
+      decoration: BoxDecoration(
+        border: Border.all(color: primaryColor),
+        color: colorva&&colorvalchek?primaryColor:white_Color,
+        borderRadius: BorderRadius.circular(8),
+                  ),
+                    child: Text("LISTING",
+                      style: TextStyle(
+                          //color:primaryColor,
+                        color:colorva&&colorvalchek?white_Color:primaryColor,
+                          fontWeight: FontWeight.bold,fontSize: 13),
                     ),
                   ),
-                );
-              },
-              scrollDirection: Axis.horizontal,
+                ),
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      //
+                      v_carprice=true;
+                      listingbtn = false;
+                      //
+                      if(colorva1==true){
+                        colorva1=false;
+                      }else{
+                        colorva1=true;
+                      }
+                      if(colorvalchek==true&&colorva==true) {
+                        colorvalchek = true;
+                        colorva=false;
+                      } else if(colorvalchek==true&&colorva2==true){
+                        colorvalchek = true;
+                        colorva2=false;
+                      }
+                      else{
+                        colorvalchek = true;
+                      }
+                      //colorvalchek=true;
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(15, 4, 15, 4),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: primaryColor),
+                      color: colorva1&&colorvalchek?primaryColor:white_Color,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text("CAR PRICE",
+                      //categeriesNames[index]['categeriesNames'],
+                      style: TextStyle(
+                          color:colorva1&&colorvalchek?white_Color:primaryColor,
+                          fontWeight: FontWeight.bold,fontSize: 13),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      if(colorva2==true)
+                      {
+                        colorva2=false;
+                      }else{
+                        colorva2=true;
+                      }
+                      if(colorvalchek==true&&colorva1==true) {
+                        colorvalchek = true;
+                        colorva1=false;
+                      }
+                      else if(colorvalchek==true&&colorva==true){
+                        colorvalchek = true;
+                        colorva=false;
+                      }
+                      else{
+                        colorvalchek = true;
+                      }
+                    });
+
+
+                  },
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(15, 4, 15, 4),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: primaryColor),
+                      color: colorva2&&colorvalchek?primaryColor:white_Color,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text("BRAND CATEGORY",
+                      //categeriesNames[index]['categeriesNames'],
+                      style: TextStyle(
+                          color:colorva2&&colorvalchek?white_Color:primaryColor,
+                          fontWeight: FontWeight.bold,fontSize: 13),
+                    ),
+                  ),
+                ),
+
+              ],
             ),
           ),
           SizedBox(height: 10),
