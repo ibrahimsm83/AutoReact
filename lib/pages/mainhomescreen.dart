@@ -39,7 +39,12 @@ final List<String> SvgIconsList = [
 
 
 class _MainHomeScreenState extends State<MainHomeScreen> {
-  RangeValues _currentRangeValues = const RangeValues(20, 60);
+ // RangeValues _currentRangeValues = const RangeValues(20, 60);
+  RangeValues values = RangeValues(100, 300);
+  RangeLabels labels =RangeLabels('1', "300");
+  int minvalue=100;
+  int maxvalue=300;
+
   String favouriteicon = "$imgpath/savefillicon.svg";
   bool _checkboxForSale = false;
   bool _checkboxForBuy = false;
@@ -51,6 +56,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
 
   bool listingbtn = false;
   bool v_carprice = false;
+  bool brandCtg = false;
   bool  tab=false;
   var value;
 
@@ -155,6 +161,10 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                 InkWell(
                   onTap: (){
                     setState(() {
+                      brandCtg=true;
+                      v_carprice=false;
+                      listingbtn = false;
+
                       if(colorva2==true)
                       {
                         colorva2=false;
@@ -202,7 +212,7 @@ Expanded(
           SingleChildScrollView(
             child: listingbtn?
             CarListing():v_carprice?
-            carprice():Homebody(),
+            carprice():brandCtg?brandCategory():Homebody(),
             //    :tab?pages[index]:Homebody(),
           ),
 ),
@@ -533,189 +543,759 @@ Expanded(
   }
   /*----------------------------------carprice--------------------------------------- */
   Widget carprice() {
-    return Column(
-      children: [
-        SizedBox(height: 10,),
-        Container(
-          padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-          decoration: BoxDecoration(
-            border: Border.all(color: text_Color,width: 2.0),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            "Price Range: 100K - 300M",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        //slider
-        RangeSlider(
-          values: _currentRangeValues,
-          min: 0,
-          max: 100,
-          // divisions: 10,
-          activeColor: primaryColor,
-          inactiveColor: Colors.black12,
-          labels: RangeLabels(
-            _currentRangeValues.start.round().toString(),
-            _currentRangeValues.end.round().toString(),
-          ),
-          onChanged: (RangeValues values) {
-            setState(() {
-              _currentRangeValues = values;
-            });
-          },
-        ),
-        //builder
-        //done btn
-        Container(
-            child: Column(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: 10,),
+          Container(
+            width: sizeWidth(context)*0.6,
+            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+            decoration: BoxDecoration(
+              border: Border.all(color: text_Color,width: 2.0),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: 70,
-                  color: primaryColor,
-                  child:Padding(
-                    padding: const EdgeInsets.only(top:0.0,bottom: 0.0,left: 15.0,right: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("RESET",style: TextStyle(color: white_Color),),
-                        ElevatedButton(
-                          child: Text('DONE',style: TextStyle(color: primaryColor),),
-                          style: ElevatedButton.styleFrom(
-                            primary: white_Color,
-                          ),
-                          onPressed: () {
-                            print('Pressed');
-                          },
-                        )
-                      ],
-                    ),
-                  ),
+                Text(
+                  "Price Range:",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                //cars price list
-                Container(
-                  height: sizeheight(context)*0.57,
-                  padding: EdgeInsets.only(bottom: 10),
-                  child:ListView.builder(
-                    itemCount:imgListpost.length ,
-                    itemBuilder: (context,index){
-                      return  Container(
-                        //margin: EdgeInsets.only(top: 8),
-                          child: UserPostes(context,imgListpost[index],favouriteicon,primaryColor));
-                    },
-                  ),
+                Text(
+                  "${minvalue}k - ",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "${maxvalue}M",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
-            )
-        ),
-      ],
+            ),
+          ),
+          //slider
+          RangeSlider(
+           // values: _currentRangeValues,
+            min: 1,
+            max: 300,
+             //divisions: 5,
+            values: values,
+            labels: labels,
+            activeColor: primaryColor,
+            inactiveColor: Colors.black12,
+            // labels: RangeLabels(
+            //   _currentRangeValues.start.round().toString(),
+            //   _currentRangeValues.end.round().toString(),
+            // ),
+            onChanged: (value) {
+              print("START: ${value.start}, End: ${value.end}");
+              setState(() {
+              //  _currentRangeValues = values;
+                minvalue= value.start.floor();
+                maxvalue=value.end.floor();
+                values =value;
+                labels =RangeLabels("${value.start.toInt().toString()}\$", "${value.start.toInt().toString()}\$");
+                print("--------------");
+                print(labels);
+
+              });
+            },
+          ),
+          //builder
+          //done btn
+          Container(
+              child: Column(
+                children: [
+                  Container(
+                    height: 70,
+                    color: primaryColor,
+                    child:Padding(
+                      padding: const EdgeInsets.only(top:0.0,bottom: 0.0,left: 15.0,right: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("RESET",style: TextStyle(color: white_Color),),
+                          ElevatedButton(
+                            child: Text('DONE',style: TextStyle(color: primaryColor),),
+                            style: ElevatedButton.styleFrom(
+                              primary: white_Color,
+                            ),
+                            onPressed: () {
+                              print('Pressed');
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  //cars price list
+
+                ],
+              )
+          ),
+          Container(
+            //height: sizeheight(context)*0.57,
+            padding: EdgeInsets.only(bottom: 10),
+            child:ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount:imgListpost.length ,
+              itemBuilder: (context,index){
+                return  Container(
+                  //margin: EdgeInsets.only(top: 8),
+                    child: UserPostes(context,imgListpost[index],favouriteicon,primaryColor));
+              },
+            ),
+          ),
+        ],
+      ),
     );
 
   }
   /*----------------------------------CarListing--------------------------------------- */
   Widget CarListing(){
-    return  Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            //color: Colors.white,
-            // border: Border.all(color: Colors.blueAccent),
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(0),
-          ),
-          child: Row(
-            children: [
-              Checkbox(
-                focusColor: primaryColor,
-                activeColor: primaryColor,
-                value: _checkboxForSale,
-                onChanged: (value) {
-                  setState(() {
-                    _checkboxForSale? _checkboxForSale = false: _checkboxForSale = true;
-                  });
-                },
+    return  SingleChildScrollView(
+      child: Container(
+        child: Column(
+          children: [
+            //For sale
+            Container(
+              decoration: BoxDecoration(
+                //color: Colors.white,
+                // border: Border.all(color: Colors.blueAccent),
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(0),
               ),
-              Text("For Sale"),
-            ],
-          ),
-        ),
-        //For buy
-        Container(
-          child: Row(
-            children: [
-              Checkbox(
-                focusColor: primaryColor,
-                activeColor: primaryColor,
-                value: _checkboxForBuy,
-                onChanged: (value) {
-                  setState(() {
-                    _checkboxForBuy? _checkboxForBuy = false: _checkboxForBuy = true;
-                  });
-                },
-              ),
-              Text("For Buy"),
-            ],
-          ),
-        ),
-        SizedBox(height: 3.0,),
-        //For Rent
-        Container(
-          decoration: BoxDecoration(
-            //color: Colors.white,
-            // border: Border.all(color: Colors.blueAccent),
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(0),
-          ),
-          child: Row(
-            children: [
-              Checkbox(
-                focusColor: primaryColor,
-                activeColor: primaryColor,
-                value: _checkboxForRent,
-                onChanged: (value) {
-                  setState(() {
-                    _checkboxForRent? _checkboxForRent = false: _checkboxForRent = true;
-                  });
-                },
-              ),
-              Text("For Rent"),
-            ],
-          ),
-        ),
-        //done btn
-        Container(
-          child: Column(
-            children: [
-              Container(
-                height: 70,
-                color: primaryColor,
-                child:Padding(
-                  padding: const EdgeInsets.only(top:0.0,bottom: 0.0,left: 15.0,right: 15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("RESET",style: TextStyle(color: white_Color),),
-                      ElevatedButton(
-                        child: Text('DONE',style: TextStyle(color: primaryColor),),
-                        style: ElevatedButton.styleFrom(
-                          primary: white_Color,
-                        ),
-                        onPressed: () {
-                          print('Pressed');
-                        },
-                      )
-                    ],
+              child: Row(
+                children: [
+                  Checkbox(
+                    focusColor: primaryColor,
+                    activeColor: primaryColor,
+                    value: _checkboxForSale,
+                    onChanged: (value) {
+                      setState(() {
+                        _checkboxForSale? _checkboxForSale = false: _checkboxForSale = true;
+                      });
+                    },
                   ),
+                  Text("For Sale"),
+                ],
+              ),
+            ),
+            //For buy
+            Container(
+              child: Row(
+                children: [
+                  Checkbox(
+                    focusColor: primaryColor,
+                    activeColor: primaryColor,
+                    value: _checkboxForBuy,
+                    onChanged: (value) {
+                      setState(() {
+                        _checkboxForBuy? _checkboxForBuy = false: _checkboxForBuy = true;
+                      });
+                    },
+                  ),
+                  Text("For Buy"),
+                ],
+              ),
+            ),
+            SizedBox(height: 3.0,),
+            //For Rent
+            Container(
+              decoration: BoxDecoration(
+                //color: Colors.white,
+                // border: Border.all(color: Colors.blueAccent),
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(0),
+              ),
+              child: Row(
+                children: [
+                  Checkbox(
+                    focusColor: primaryColor,
+                    activeColor: primaryColor,
+                    value: _checkboxForRent,
+                    onChanged: (value) {
+                      setState(() {
+                        _checkboxForRent? _checkboxForRent = false: _checkboxForRent = true;
+                      });
+                    },
+                  ),
+                  Text("For Rent"),
+                ],
+              ),
+            ),
+            //done btn
+           Container(
+              height: 70,
+              color: primaryColor,
+              child:Padding(
+                padding: const EdgeInsets.only(top:0.0,bottom: 0.0,left: 15.0,right: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("RESET",style: TextStyle(color: white_Color),),
+                    ElevatedButton(
+                      child: Text('DONE',style: TextStyle(color: primaryColor),),
+                      style: ElevatedButton.styleFrom(
+                        primary: white_Color,
+                      ),
+                      onPressed: () {
+                        print('Pressed');
+                      },
+                    )
+                  ],
                 ),
               ),
-              //listview builder
-
+            ),
+            Container(
+              //height: sizeheight(context)*0.57,
+              padding: EdgeInsets.only(bottom: 10),
+              child:
+              // Expanded(child:
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount:imgListpost.length ,
+                itemBuilder: (context,index){
+                  return  Container(
+                    //margin: EdgeInsets.only(top: 8),
+                      child: UserPostes(context,imgListpost[index],favouriteicon,primaryColor));
+                },
+              ),
+              //),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  /*----------------------------------BrandCaterogy--------------------------------------- */
+  Widget brandCategory() {
+    return SingleChildScrollView(
+      child: Container(
+            margin: EdgeInsets.only(left: 5,right:5),
+            //color: Colors.yellow,
+           // height: sizeheight(context)*0.5,
+            child: Column(
+            children: [
+         SizedBox(height: 10,),
+              //Row1
               Container(
-                height: sizeheight(context)*0.57,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                       // color: Colors.red,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                        '$imgpath/brandcategory/Motors-logo.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    //  child: Text("image 1"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                       // color: Colors.orange,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/KIA_motors.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //child: Text("image 2"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                       // color: Colors.green,
+                       // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Hyundai-logo1.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    //  child: Text("image 3"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                       // color: Colors.pink,
+                       // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/daewoo.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                     // child: Text("image 4"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        //color: Colors.blue,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/fpv.png'
+
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                     // child: Text("image 5"),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+              //Row2
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.red,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Horse.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 1"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.orange,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Acture.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //child: Text("image 2"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.green,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/toyota.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 3"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.pink,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Suzuki.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 4"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        //color: Colors.blue,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Nissan.png'
+
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 5"),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+              //Row3
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.red,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Mitsubishi.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 1"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.orange,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Manufacturer_MAZDA.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //child: Text("image 2"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.green,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/LEXUS.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 3"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.pink,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Infiniti-logo.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 4"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        //color: Colors.blue,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Geely-logo.png'
+
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 5"),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+              //Row4
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.red,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Roewe-.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 1"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.orange,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Jac-motors.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //child: Text("image 2"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.green,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/circle.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 3"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.pink,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Hafei-logo.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 4"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        //color: Colors.blue,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/peugeot.png'
+
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 5"),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+              //Row5
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.red,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Lancia-Log.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 1"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.orange,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/venturi.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //child: Text("image 2"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.green,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/purepng.com-.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 3"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.pink,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Citroen.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 4"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        //color: Colors.blue,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/bugatti-logo.png'
+
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 5"),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+              //Row6
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.red,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/bmw.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 1"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.orange,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/buick-logo.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //child: Text("image 2"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.green,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/jaguar.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      //  child: Text("image 3"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        // color: Colors.pink,
+                        // borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/Cadillac.png'
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 4"),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      decoration: new BoxDecoration(
+                        //color: Colors.blue,
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              '$imgpath/brandcategory/chevrolet.png'
+
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // child: Text("image 5"),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+              //List
+              Container(
+               // height: sizeheight(context)*0.57,
                 padding: EdgeInsets.only(bottom: 10),
-                child:
-                // Expanded(child:
-                ListView.builder(
+                child:ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount:imgListpost.length ,
                   itemBuilder: (context,index){
                     return  Container(
@@ -723,14 +1303,10 @@ Expanded(
                         child: UserPostes(context,imgListpost[index],favouriteicon,primaryColor));
                   },
                 ),
-                //),
               ),
             ],
-          ),
-        )
-
-      ],
+          ),),
     );
-  }
 
+  }
 }
