@@ -84,9 +84,11 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                     setState(() {
                       listingbtn = true;
                       v_carprice=false;
+                      brandCtg=false;
 
                       if(colorva==true){
                         colorva=false;
+                        listingbtn=false;
                       }else{
                         colorva=true;
                       }
@@ -104,7 +106,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                     });
                   },
                   child: Container(
-            padding: EdgeInsets.fromLTRB(15, 4, 15, 4),
+            padding: EdgeInsets.fromLTRB(25, 4, 25, 4),
       decoration: BoxDecoration(
         border: Border.all(color: primaryColor),
         color: colorva&&colorvalchek?primaryColor:white_Color,
@@ -124,9 +126,11 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                       //
                       v_carprice=true;
                       listingbtn = false;
+                      brandCtg=false;
                       //
                       if(colorva1==true){
                         colorva1=false;
+                        v_carprice=false;
                       }else{
                         colorva1=true;
                       }
@@ -144,7 +148,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                     });
                   },
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(15, 4, 15, 4),
+                    padding: EdgeInsets.fromLTRB(25, 4, 25, 4),
                     decoration: BoxDecoration(
                       border: Border.all(color: primaryColor),
                       color: colorva1&&colorvalchek?primaryColor:white_Color,
@@ -168,6 +172,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                       if(colorva2==true)
                       {
                         colorva2=false;
+                        brandCtg=false;
                       }else{
                         colorva2=true;
                       }
@@ -183,11 +188,9 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                         colorvalchek = true;
                       }
                     });
-
-
                   },
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(15, 4, 15, 4),
+                    padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
                     decoration: BoxDecoration(
                       border: Border.all(color: primaryColor),
                       color: colorva2&&colorvalchek?primaryColor:white_Color,

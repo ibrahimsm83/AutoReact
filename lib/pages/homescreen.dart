@@ -226,7 +226,8 @@ class _HomePageState extends State<HomePage>
         ),
       ),*/
       //ibrar bottom tab bar
-      bottomNavigationBar: Material(
+      bottomNavigationBar: Bottomappbar(SvgIconsList,context),
+      /*Material(
         //color: Colors.teal,
         child: new Container(
           height: 60.0,
@@ -334,7 +335,7 @@ class _HomePageState extends State<HomePage>
             ],
           ),
         ),
-      ),
+      ),*/
       //bottom tabbar end
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       //
@@ -350,7 +351,8 @@ class _HomePageState extends State<HomePage>
       ),
       drawer: MainDrawer(),
       //bottom nav bnar
-      body: TabBarView(
+      body:   MainHomeScreen(),
+      /*TabBarView(
         controller: _tabController,
         children: [
           MainHomeScreen(),
@@ -362,7 +364,7 @@ class _HomePageState extends State<HomePage>
           FindFriendspg(),
           ChatPage(isSearchPresses: widget.isSearch,),
         ],
-      ),
+      ),*/
 //           Column(
 //         children: [
 //           //searchbox
@@ -605,11 +607,6 @@ class _HomePageState extends State<HomePage>
       ],
     );
   }
-
-  gotochatscreen() {
-    Navigator.pushNamed(context,'ChatPage');
-  }
-
 /*--------------------------------FAB---------------------------------------------------*/
 
 }

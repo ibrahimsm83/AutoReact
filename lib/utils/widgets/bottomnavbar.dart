@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 Widget Bottomappbar(List<String> btmiconpath,BuildContext context){
+  bool activecolo=false;
   return
     BottomAppBar(
     color: Colors.white,
@@ -13,15 +14,20 @@ Widget Bottomappbar(List<String> btmiconpath,BuildContext context){
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10,5,5,5),
-            child: Container(
-              child: Column(
-                children: [
-                    SvgPicture.asset(btmiconpath[2],color: primaryColor,height: 25,width: 25,),
-                  Container(
-                      child: Text("Home",style: TextStyle(color:primaryColor),))
-                ],
+          GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(context,'HomePage');
+            },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10,5,5,5),
+              child: Container(
+                child: Column(
+                  children: [
+                      SvgPicture.asset(btmiconpath[2],color: primaryColor,height: 25,width: 25,),
+                    Container(
+                        child: Text("Home",style: TextStyle(color:primaryColor),))
+                  ],
+                ),
               ),
             ),
           ),
@@ -31,7 +37,7 @@ Widget Bottomappbar(List<String> btmiconpath,BuildContext context){
           //   onPressed: (){},
           // ),
           InkWell(
-            onTap: ()=>Navigator.pushNamed(context, 'messageScreen'),
+            onTap: ()=>Navigator.pushNamed(context, 'ChatPage'),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10,5,5,5),
               child: Container(

@@ -14,6 +14,7 @@ import 'package:autoreact/pages/signupscreen.dart';
 import 'package:autoreact/pages/signupwithmedia.dart';
 import 'package:autoreact/pages/splashscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:autoreact/pages/audio_call_screen.dart';
 //Route NavigatorUserMediaError
 
 class RouteGenerator {
@@ -59,6 +60,9 @@ class RouteGenerator {
         //ChatPage
       case 'ChatPage':
         return MaterialPageRoute(builder: (context) => ChatPage());
+        //AudioCallScreen
+      case 'AudioCallScreen':
+        return MaterialPageRoute(builder: (context) => AudioCallScreen());
       default:
         throw('Route name does not exit');
     }

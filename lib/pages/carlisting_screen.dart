@@ -105,58 +105,58 @@ class _CarListingpgState extends State<CarListingpg> {
             ),
           ),
           //item list
-          Container(
-            height: sizeheight(context) * 0.04,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: categeriesNames.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        colorva = false;
-                        value = index;
-                        if(index==0) {
-                          print(index);
-                          listingbtn = true;
-                        }
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: primaryColor),
-                        color: categeriesNames[index]['InstituteName'] == "LISTING" &&
-                            colorva
-                            ? primaryColor
-                            : index == value
-                            ? primaryColor
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        categeriesNames[index]['InstituteName'],
-                        style: TextStyle(
-                            color: categeriesNames[index]['InstituteName'] ==
-                                "LISTING" &&
-                                colorva
-                                ? Colors.white
-                                : index == value
-                                ? Colors.white
-                                : primaryColor,
-                            fontWeight: FontWeight.bold),
-                      ),
-
-                      //child:isntituteNames[index]['InstituteName']=="ALL"&&colorva?Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),):index==value?Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),):Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:primaryColor,fontWeight: FontWeight.bold),)
-                    ),
-                  ),
-                );
-              },
-              scrollDirection: Axis.horizontal,
-            ),
-          ),
+          // Container(
+          //   height: sizeheight(context) * 0.04,
+          //   child: ListView.builder(
+          //     shrinkWrap: true,
+          //     itemCount: categeriesNames.length,
+          //     itemBuilder: (context, index) {
+          //       return Padding(
+          //         padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+          //         child: InkWell(
+          //           onTap: () {
+          //             setState(() {
+          //               colorva = false;
+          //               value = index;
+          //               if(index==0) {
+          //                 print(index);
+          //                 listingbtn = true;
+          //               }
+          //             });
+          //           },
+          //           child: Container(
+          //             padding: EdgeInsets.fromLTRB(15, 7, 15, 7),
+          //             decoration: BoxDecoration(
+          //               border: Border.all(color: primaryColor),
+          //               color: categeriesNames[index]['InstituteName'] == "LISTING" &&
+          //                   colorva
+          //                   ? primaryColor
+          //                   : index == value
+          //                   ? primaryColor
+          //                   : Colors.white,
+          //               borderRadius: BorderRadius.circular(8),
+          //             ),
+          //             child: Text(
+          //               categeriesNames[index]['InstituteName'],
+          //               style: TextStyle(
+          //                   color: categeriesNames[index]['InstituteName'] ==
+          //                       "LISTING" &&
+          //                       colorva
+          //                       ? Colors.white
+          //                       : index == value
+          //                       ? Colors.white
+          //                       : primaryColor,
+          //                   fontWeight: FontWeight.bold),
+          //             ),
+          //
+          //             //child:isntituteNames[index]['InstituteName']=="ALL"&&colorva?Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),):index==value?Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),):Text(isntituteNames[index]['InstituteName'],style: TextStyle(color:primaryColor,fontWeight: FontWeight.bold),)
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //     scrollDirection: Axis.horizontal,
+          //   ),
+          // ),
           SizedBox(height: 10),
           //users
           Expanded(
