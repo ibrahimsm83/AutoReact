@@ -55,7 +55,7 @@ class _MainDrawerState extends State<MainDrawer> {
     List<String> drowerIconName=['SEARCH','FIND FRIENDS','CAR DELARS','CAR LISTING','MY FAVOURITES','NEWS & BLOG','AUCTIONS','INVITE','CAR EVENTS','ABOUT US','CONTACT US','SETTINGS'];
     //Routes
     final String homepath='HomePage';
-    Map<int,dynamic> rout={0:'ForgetPassword',1:'FindFriendspg',2:'CarDelarspg',3:'CarListingpg',4:'MyFavoutiresPg',6:'AuctionsScreenpg',9:'aboutscreen'};
+    Map<int,dynamic> rout={0:'ForgetPassword',1:'FindFriendspg',2:'CarDelarspg',3:'CarListingpg',4:'MyFavoutiresPg',6:'AuctionsScreenpg',8:'Carevents',9:'aboutscreen'};
     return SafeArea(
       child: Drawer(
           child:SingleChildScrollView(
